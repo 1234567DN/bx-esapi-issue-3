@@ -51,6 +51,8 @@ This module contributes the following ESAPI encoding BIFs:
 * `encodeForXMLAttribute( value, [canonicalize=false] )` - Encode for XML attribute contexts
 * `encodeForXPath( value, [canonicalize=false])` - Encode for XPath contexts
 
+For the Issue #3 investigation and validation plan covering `encodeForURL(value, true)`, see [Issue #3: `encodeForURL` Canonicalize Flag Failure](docs/issue-3-canonicalize-encodeforurl.md).
+
 The available contexts for encoding are:
 
 * `CSS`
