@@ -1,17 +1,3 @@
-/**
- * [BoxLang]
- *
- * Copyright [2023] [Ortus Solutions, Corp]
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
 package ortus.boxlang.modules.esapi.bifs;
 
 import org.owasp.esapi.ESAPI;
@@ -86,20 +72,23 @@ public class EncodeForUnits extends BIF {
 		// Get the ESAPI encoder
 		Encoder encoder = ESAPI.encoder();
 
-		// Canonicalize the input string if requested.
-		// Use restrictMultiple=false and restrictMixed=false so canonicalization always
-		// normalizes the string without throwing IntrusionException, regardless of the
-		// Encoder.AllowMultipleEncoding/Encoder.AllowMixedEncoding settings in ESAPI.properties.
-		// This matches Adobe ColdFusion's documented default behavior for canonicalize=true.
-		if ( canonicalize ) {
-			str = encoder.canonicalize( str, false, false );
-		}
-
 		if ( bifMethodKey.equals( KeyDirectory.urlEncode ) ) {
 			bifMethodKey = KeyDirectory.encodeForURL;
 		}
 
 		try {
+			if ( bifMethodKey.equals( KeyDirectory.encodeForURL ) ) {
+				str = encoder.encodeForURL( str );
+				if ( canonicalize ) {
+					str = encoder.canonicalize( str, false, false );
+				}
+				return str;
+			}
+
+			if ( canonicalize ) {
+				str = encoder.canonicalize( str, false, false );
+			}
+
 			if ( bifMethodKey.equals( KeyDirectory.encodeForCSS ) ) {
 				return encoder.encodeForCSS( str );
 			} else if ( bifMethodKey.equals( KeyDirectory.encodeForDN ) ) {
@@ -112,8 +101,6 @@ public class EncodeForUnits extends BIF {
 				return encoder.encodeForJavaScript( str );
 			} else if ( bifMethodKey.equals( KeyDirectory.encodeForLDAP ) ) {
 				return encoder.encodeForLDAP( str );
-			} else if ( bifMethodKey.equals( KeyDirectory.encodeForURL ) ) {
-				return encoder.encodeForURL( str );
 			} else if ( bifMethodKey.equals( KeyDirectory.encodeForXML ) ) {
 				return encoder.encodeForXML( str );
 			} else if ( bifMethodKey.equals( KeyDirectory.encodeForXMLAttribute ) ) {

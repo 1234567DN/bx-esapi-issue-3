@@ -3,7 +3,7 @@
 **Tracking ID:** BX-ESAPI / BL-1119
 **Repository:** [1234567DN/bx-esapi-issue-3](https://github.com/1234567DN/bx-esapi-issue-3)
 **Upstream module:** [ortus-boxlang/bx-esapi](https://github.com/ortus-boxlang/bx-esapi)
-**Status:** Documentation and investigation complete; implementation and final verification pending
+**Status:** Fixed and verified
 **Target branch:** `development`
 
 ## Problem Statement
@@ -185,4 +185,4 @@ Issue #3 is complete when all of the following are true:
 ## Progress Updates
 
 - **October 15, 2026:** Custom repository created from the upstream `bx-esapi` module. Issue #3 investigation and documentation added. Runtime implementation and regression testing remain the next work items.
-- **Completion update:** To be added after the implementation, test suite, and CI checks meet the success criteria above.
+- **October 22, 2026:** Implemented the URL-specific encode-then-canonicalize flow in `EncodeForUnits.java`. Added regression coverage for the reported reproduction, plain canonicalized URL input, the default argument, and existing non-canonicalizing behavior. The focused ESAPI test class and formatting checks pass; the full suite was run successfully after the BoxLang test artifacts were downloaded.
